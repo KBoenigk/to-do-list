@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Todo} from "../../shared/todo.model";
+import {StoreService} from "../../shared/store.service";
 
 @Component({
   selector: 'app-list-item',
@@ -7,13 +9,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListItemComponent implements OnInit {
 
-  constructor() { }
+  @Input() todo: Todo;
+  @Output() editMode = new EventEmitter<Todo>();
+
+  constructor(private storeService: StoreService) { }
 
   ngOnInit(): void {
   }
 
-  checked(event: any) {
+  checkOff(event: any) {
     event.stopPropagation();
-    console.log('checked');
+    this.storeService.checkOff(this.todo);
+  }
+
+  delete(event: any) {
+    event.stopPropagation();
+    this.storeService.delete(this.todo);
+  }
+
+  edit(event: any) {
+    event.stopPropagation();
+    this.editMode.emit(this.todo);
   }
 }

@@ -1,15 +1,20 @@
 <mat-expansion-panel>
   <mat-expansion-panel-header>
     <mat-panel-title>
-      This is the expansion title
+      {{todo.dueDate}}
     </mat-panel-title>
     <mat-panel-description>
-      This is a summary of the content
+      {{todo.title}}
     </mat-panel-description>
-    <button mat-icon-button (click)="checked($event)">
-      <mat-icon>check</mat-icon>
+    <button mat-icon-button (click)="checkOff($event)">
+      <mat-icon [style.color]="todo.done ? '#006064' : '#9E9E9E'">check</mat-icon>
+    </button>
+    <button mat-icon-button (click)="edit($event)">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button mat-icon-button (click)="delete($event)">
+      <mat-icon>delete</mat-icon>
     </button>
   </mat-expansion-panel-header>
-  <app-detail></app-detail>
-  <app-edit></app-edit>
+  <p>{{todo.description}}</p>
 </mat-expansion-panel>

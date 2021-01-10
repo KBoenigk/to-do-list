@@ -1,7 +1,4 @@
-<mat-toolbar>
-  <span>Todo-List</span>
-</mat-toolbar>
 <mat-accordion>
-  <app-list-item></app-list-item>
+  <app-list-item *ngFor="let todo of storeService.todos" [todo]="todo" (editMode)="onEditMode($event)"></app-list-item>
 </mat-accordion>
-<button mat-raised-button color="primary" (click)="add()">Add</button>
+

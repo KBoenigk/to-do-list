@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {StoreService} from "../shared/store.service";
+import {Todo} from "../shared/todo.model";
 
 @Component({
   selector: 'app-list',
@@ -7,12 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListComponent implements OnInit {
 
-  constructor() { }
+  @Output() editMode = new EventEmitter<Todo>();
+
+  constructor(public storeService: StoreService) { }
 
   ngOnInit(): void {
   }
 
-  add() {
-    console.log('Hallo');
+  onEditMode(todo: Todo) {
+    this.editMode.emit(todo);
   }
 }

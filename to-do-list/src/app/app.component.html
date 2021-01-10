@@ -1,3 +1,12 @@
-<app-list>
-
-</app-list>
+<mat-toolbar>
+  <span>Todo-List</span>
+</mat-toolbar>
+<mat-grid-list cols="2">
+  <mat-grid-tile>
+    <app-list (editMode)="onEditMode($event)"></app-list>
+  </mat-grid-tile>
+  <mat-grid-tile *ngIf="editMode">
+    <app-edit (editCompleted)="onEditCompleted($event)" [todo]="todo"></app-edit>
+  </mat-grid-tile>
+</mat-grid-list>
+<button mat-raised-button color="primary" (click)="add()" >Add</button>

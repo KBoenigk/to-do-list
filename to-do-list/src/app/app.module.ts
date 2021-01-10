@@ -6,29 +6,37 @@ import { AppComponent } from './app.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ListComponent } from './list/list.component';
 import { ListItemComponent } from './list/list-item/list-item.component';
-import { DetailComponent } from './list/list-item/detail/detail.component';
-import { EditComponent } from './list/list-item/edit/edit.component';
+import { EditComponent } from './edit/edit.component';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatButtonModule} from "@angular/material/button";
 import {MatExpansionModule} from "@angular/material/expansion";
 import {MatIconModule} from "@angular/material/icon";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatMomentDateModule} from "@angular/material-moment-adapter";
+import {MatGridListModule} from "@angular/material/grid-list";
 
 @NgModule({
   declarations: [
     AppComponent,
     ListComponent,
     ListItemComponent,
-    DetailComponent,
     EditComponent
   ],
     imports: [
-        BrowserModule,
-        AppRoutingModule,
-        NoopAnimationsModule,
-        MatToolbarModule,
-        MatButtonModule,
-        MatExpansionModule,
-        MatIconModule
+      BrowserModule,
+      AppRoutingModule,
+      NoopAnimationsModule,
+      MatToolbarModule,
+      MatButtonModule,
+      MatExpansionModule,
+      MatIconModule,
+      MatFormFieldModule,
+      MatInputModule,
+      MatDatepickerModule,
+      MatMomentDateModule,
+      MatGridListModule
     ],
   providers: [],
   bootstrap: [AppComponent]
