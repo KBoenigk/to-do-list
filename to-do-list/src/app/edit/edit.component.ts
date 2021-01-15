@@ -32,6 +32,11 @@ export class EditComponent implements OnInit {
    */
   private isNewTodo = false;
 
+  title: string;
+
+  /**
+   * Fälligkeitsdatum des Todos
+   */
   dueDate;
 
 
@@ -41,9 +46,13 @@ export class EditComponent implements OnInit {
    * Prüft, ob ein vorhandenes Todo bearbeitet werden soll oder ob ein neues erstellt werden soll.
    */
   ngOnInit(): void {
+
     if (!this.todo) {
       this.isNewTodo = true;
       this.todo = new Todo('', '', '')
+      this.title = 'New Todo';
+    } else {
+      this.title = 'Edit Todo';
     }
 
     this.dueDate = new FormControl(moment(this.todo.dueDate));
@@ -68,4 +77,10 @@ export class EditComponent implements OnInit {
     this.editCompleted.emit(true);
   }
 
+  /**
+   * Informiert die anderen Komponenten, dass das Bearbeiten beendet wurde. Änderungen werden nicht gespeichert.
+   */
+  cancel() {
+    this.editCompleted.emit(true);
+  }
 }
