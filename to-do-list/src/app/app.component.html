@@ -1,5 +1,20 @@
 <mat-toolbar color="primary">
   <img src="assets/Logo.png">
+  <span class="spacer"></span>
+  <button mat-icon-button [matMenuTriggerFor]="filter">
+    <mat-icon>filter_alt</mat-icon>
+  </button>
+  <mat-menu #filter='matMenu'>
+    <button mat-menu-item (click)="filterTodos('all')">
+      <span>Show All</span>
+    </button>
+    <button mat-menu-item (click)="filterTodos('pending')">
+      <span>Show Pending</span>
+    </button>
+    <button mat-menu-item (click)="filterTodos('done')">
+      <span>Show Done</span>
+    </button>
+  </mat-menu>
 </mat-toolbar>
 <div class="container">
   <div class="row">

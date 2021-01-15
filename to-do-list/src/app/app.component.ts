@@ -54,4 +54,8 @@ export class AppComponent {
     this.todo = todo;
     this.editMode = true;
   }
+
+  filterTodos(filter: string) {
+    console.log(filter);
+  }
 }
