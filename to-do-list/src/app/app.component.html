@@ -10,8 +10,12 @@
     <div class="col-xs-12 order-md-last order-xs-first"
          *ngIf="editMode"
          [ngClass]="editMode ? 'col-md-6' : 'col-md-12'">
-      <app-edit (editCompleted)="onEditCompleted($event)"></app-edit>
+      <app-edit
+        (editCompleted)="onEditCompleted($event)"
+        [todo]="this.todo"></app-edit>
     </div>
   </div>
 </div>
-<button mat-raised-button color="primary" (click)="add()" >Add</button>
+<button mat-fab color="primary" class="add-fab" (click)="add()" >
+  <mat-icon>add</mat-icon>
+</button>

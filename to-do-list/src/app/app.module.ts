@@ -16,6 +16,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatMomentDateModule} from "@angular/material-moment-adapter";
 import {MatGridListModule} from "@angular/material/grid-list";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -24,20 +25,21 @@ import {MatGridListModule} from "@angular/material/grid-list";
     ListItemComponent,
     EditComponent
   ],
-    imports: [
-      BrowserModule,
-      AppRoutingModule,
-      NoopAnimationsModule,
-      MatToolbarModule,
-      MatButtonModule,
-      MatExpansionModule,
-      MatIconModule,
-      MatFormFieldModule,
-      MatInputModule,
-      MatDatepickerModule,
-      MatMomentDateModule,
-      MatGridListModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    NoopAnimationsModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatExpansionModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatMomentDateModule,
+    MatGridListModule,
+    ReactiveFormsModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
