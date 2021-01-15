@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Todo} from "../../shared/todo.model";
 import {StoreService} from "../../shared/store.service";
+import * as moment from 'moment';
 
 /**
  * Diese Komponente stellt ein Listenelement in der Liste der Todos dar.
@@ -17,6 +18,8 @@ export class ListItemComponent implements OnInit {
    */
   @Input() todo: Todo;
 
+  priority: number;
+
   /**
    * Gibt an, ob dieser Kommentar bearbeitet werden soll.
    */
@@ -25,6 +28,8 @@ export class ListItemComponent implements OnInit {
   constructor(private storeService: StoreService) { }
 
   ngOnInit(): void {
+    this.priority = moment.duration(moment(this.todo.dueDate).diff(moment.now())).asDays();
+    console.log(this.todo.title + ' ' + this.priority);
   }
 
   /**

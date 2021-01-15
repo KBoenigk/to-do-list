@@ -1,4 +1,6 @@
-<mat-expansion-panel>
+<mat-expansion-panel [ngClass]="this.todo.done ? 'done' :
+                                this.priority <= 1 ? 'urgent' :
+                                this.priority <= 2 ? 'due-soon' : ''">
   <mat-expansion-panel-header>
     <mat-panel-title>
       {{todo.dueDate}}
@@ -7,7 +9,7 @@
       {{todo.title}}
     </mat-panel-description>
     <button mat-icon-button (click)="checkOff($event)">
-      <mat-icon [style.color]="todo.done ? '#006064' : '#9E9E9E'">check</mat-icon>
+      <mat-icon [style.color]="todo.done ? '#fbc02d' : '#9E9E9E'">check</mat-icon>
     </button>
     <button mat-icon-button (click)="edit($event)">
       <mat-icon>edit</mat-icon>

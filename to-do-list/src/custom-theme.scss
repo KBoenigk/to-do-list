@@ -12,11 +12,11 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$to-do-list-primary: mat-palette($mat-cyan, 900);
-$to-do-list-accent: mat-palette($mat-pink, A200, A100, A400);
+$to-do-list-primary: mat-palette($mat-cyan, 700, 300, 900);
+$to-do-list-accent: mat-palette($mat-yellow, 700, 400, 800);
 
 // The warn palette is optional (defaults to red).
-$to-do-list-warn: mat-palette($mat-red);
+$to-do-list-warn: mat-palette($mat-deep-orange, 600);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".

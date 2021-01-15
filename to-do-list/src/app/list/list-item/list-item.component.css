@@ -1,0 +1,16 @@
+.done {
+  border-color: #aed581;
+}
+
+.urgent {
+  border-color: indianred;
+}
+
+.due-soon {
+  border-color: #fbc02d;
+}
+
+mat-expansion-panel {
+  margin-top: 10px !important;
+  border: 2px solid transparent;
+}
