@@ -15,6 +15,16 @@ export class StoreService {
   todos: Todo[];
 
   /**
+   * Alle gefilterten Todos.
+   */
+  filteredTodos: Todo[];
+
+  /**
+   * String, der den aktuell angewandten Filter repräsentiert.
+   */
+  filter = 'all';
+
+  /**
    * Wenn vorhanden, werden Todos aus dem Speicher des Browsers.
    * Wurden noch keine Todos gespeichert, wird ein neues Array angelegt
    */
@@ -25,7 +35,7 @@ export class StoreService {
     } else {
       this.todos = new Array();
     }
-
+    this.filterTodos();
   }
 
   /**
@@ -35,6 +45,7 @@ export class StoreService {
   addTodo(todo: Todo) {
     this.todos.push(todo);
     this.saveTodos();
+    this.filterTodos();
   }
 
   /**
@@ -44,6 +55,7 @@ export class StoreService {
   checkOff(checkedOffTodo: Todo) {
     this.todos.find(todo => todo.id === checkedOffTodo.id).done = !checkedOffTodo.done;
     this.saveTodos();
+    this.filterTodos();
   }
 
   /**
@@ -53,6 +65,7 @@ export class StoreService {
   delete(todoToDelete: Todo) {
     this.todos.splice(this.todos.indexOf(todoToDelete), 1);
     this.saveTodos();
+    this.filterTodos();
   }
 
   /**
@@ -64,10 +77,33 @@ export class StoreService {
   }
 
   /**
+   * Wird aufgerufen, wenn der Filter geändert wird.
+   * @param filter
+   */
+  onFilterChanged(filter: string) {
+    this.filter = filter;
+    this.filterTodos();
+  }
+
+  /**
    * Speichert die Todos im Speicher des Browsers.
    * @private
    */
   private saveTodos() {
     localStorage.setItem('todos', JSON.stringify(this.todos));
+  }
+
+  private filterTodos() {
+    switch (this.filter) {
+      case 'all':
+        this.filteredTodos = this.todos.slice();
+        break;
+      case 'done':
+        this.filteredTodos = this.todos.filter(todo => todo.done);
+        break;
+      case 'pending':
+        this.filteredTodos = this.todos.filter(todo => !todo.done);
+        break;
+    }
   }
 }

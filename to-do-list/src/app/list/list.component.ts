@@ -1,6 +1,7 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {StoreService} from "../shared/store.service";
 import {Todo} from "../shared/todo.model";
+import {Observable} from "rxjs";
 
 /**
  * Bei dieser Komponente handelt es sich um die Darstellung der Todos als Liste.

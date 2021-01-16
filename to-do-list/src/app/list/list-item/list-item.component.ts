@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Todo} from "../../shared/todo.model";
 import {StoreService} from "../../shared/store.service";
 import * as moment from 'moment';
+import {Observable} from "rxjs";
 
 /**
  * Diese Komponente stellt ein Listenelement in der Liste der Todos dar.

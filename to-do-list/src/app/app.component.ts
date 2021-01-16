@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {StoreService} from "./shared/store.service";
 import {Todo} from "./shared/todo.model";
+import {BehaviorSubject, Observable} from "rxjs";
 
 /**
  * Komponente, die das Grundgerüst der App darstellt.
@@ -56,6 +57,6 @@ export class AppComponent {
   }
 
   filterTodos(filter: string) {
-    console.log(filter);
+    this.storeService.onFilterChanged(filter);
   }
 }

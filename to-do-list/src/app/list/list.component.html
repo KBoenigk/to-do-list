@@ -1,4 +1,7 @@
 <mat-accordion>
-  <app-list-item *ngFor="let todo of storeService.todos" [todo]="todo" (editMode)="onEditMode($event)"></app-list-item>
+  <app-list-item *ngFor="let todo of storeService.filteredTodos"
+                 [todo]="todo"
+                 (editMode)="onEditMode($event)"
+                 ></app-list-item>
 </mat-accordion>
 
