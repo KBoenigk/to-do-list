@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, SimpleChanges} from '@angular/core';
 import {Todo} from "../../shared/todo.model";
 import {StoreService} from "../../shared/store.service";
 import * as moment from 'moment';
@@ -34,7 +34,7 @@ export class ListItemComponent implements OnInit {
    * Berechnet die Priorität des Todos dieses Listenelements
    */
   ngOnInit(): void {
-    this.priority = moment.duration(this.todo.dueDate.diff(moment.now())).asDays();
+
   }
 
   /**
@@ -63,5 +63,9 @@ export class ListItemComponent implements OnInit {
   edit(event: any) {
     event.stopPropagation();
     this.editMode.emit(this.todo);
+  }
+
+  getPriority(): number {
+    return moment.duration(this.todo.dueDate.diff(moment.now())).asDays();
   }
 }

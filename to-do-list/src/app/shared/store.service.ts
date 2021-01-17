@@ -46,6 +46,7 @@ export class StoreService {
    */
   addTodo(todo: Todo) {
     this.todos.push(todo);
+    this.todos.sort(this.compare);
     this.saveTodos();
     this.filterTodos();
   }
@@ -76,6 +77,8 @@ export class StoreService {
    */
   editTodo(editedTodo: Todo) {
     this.todos[this.todos.indexOf(this.todos.find(todo => todo.id === editedTodo.id))] = editedTodo;
+    this.todos.sort(this.compare);
+    this.saveTodos();
   }
 
   /**
@@ -92,7 +95,6 @@ export class StoreService {
    * @private
    */
   private saveTodos() {
-    console.log(this.todos);
     localStorage.setItem('todos', JSON.stringify(this.todos));
   }
 
@@ -126,5 +128,10 @@ export class StoreService {
       todo.done = parsedTodo.done;
       this.todos.push(todo);
     });
+    this.todos.sort(this.compare);
+  }
+
+  compare(a: Todo, b: Todo) {
+    return a.dueDate.diff(b.dueDate);
   }
 }

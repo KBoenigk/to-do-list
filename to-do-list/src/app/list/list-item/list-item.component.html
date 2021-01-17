@@ -1,6 +1,6 @@
 <mat-expansion-panel [ngClass]="this.todo.done ? 'done' :
-                                this.priority <= 1 ? 'urgent' :
-                                this.priority <= 2 ? 'due-soon' : ''">
+                                this.getPriority() <= 1 ? 'urgent' :
+                                this.getPriority() <= 2 ? 'due-soon' : ''">
   <mat-expansion-panel-header>
     <mat-panel-title>
       {{todo.dueDate.format('MM/DD/YYYY')}}
