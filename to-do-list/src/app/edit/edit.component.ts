@@ -1,9 +1,7 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {StoreService} from "../shared/store.service";
 import {Todo} from "../shared/todo.model";
-import {FormControl} from "@angular/forms";
-import * as moment from 'moment';
-
+import {NgForm} from '@angular/forms';
 
 
 /**
@@ -27,11 +25,19 @@ export class EditComponent implements OnInit {
   @Input() todo: Todo;
 
   /**
+   * Eingabeformular zum Bearbeiten und Erstellen von Todos
+   */
+  @ViewChild('todoForm') todoForm: NgForm;
+
+  /**
    * Wird der Todo neu erstellt?
    * @private
    */
   private isNewTodo = false;
 
+  /**
+   * Titel der Bearbeiten-Ansicht
+   */
   title: string;
 
   /**
@@ -49,38 +55,35 @@ export class EditComponent implements OnInit {
 
     if (!this.todo) {
       this.isNewTodo = true;
-      this.todo = new Todo('', '', '')
+      this.todo = new Todo('', '', null)
       this.title = 'New Todo';
     } else {
       this.title = 'Edit Todo';
     }
 
-    this.dueDate = new FormControl(moment(this.todo.dueDate));
-  }
-
-  /**
-   * Speichert das bearbeitete Todo über den storeService.
-   * @param title - Titel des Todos
-   * @param dueDate - Fälligkeitsdatum des Todos
-   * @param description - Beschreibung des Todos
-   */
-  save(title: string, dueDate: string, description: string) {
-    this.todo.title = title;
-    this.todo.dueDate = dueDate;
-    this.todo.description = description;
-    if (this.isNewTodo) {
-      this.storeService.addTodo(this.todo);
-    } else {
-      this.storeService.editTodo(this.todo);
-    }
-
-    this.editCompleted.emit(true);
+    // this.dueDate = new FormControl(moment(this.todo.dueDate));
   }
 
   /**
    * Informiert die anderen Komponenten, dass das Bearbeiten beendet wurde. Änderungen werden nicht gespeichert.
    */
   cancel() {
+    this.editCompleted.emit(true);
+  }
+
+  /**
+   * Speichert den neue oder bearbeitete Todo
+   */
+  onSubmit() {
+    this.todo.title = this.todoForm.value.title;
+    this.todo.dueDate = this.todoForm.value.dueDate;
+    this.todo.description = this.todoForm.value.description;
+    if (this.isNewTodo) {
+      this.storeService.addTodo(this.todo);
+    } else {
+      this.storeService.editTodo(this.todo);
+    }
+
     this.editCompleted.emit(true);
   }
 }

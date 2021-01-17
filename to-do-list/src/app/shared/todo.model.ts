@@ -1,3 +1,5 @@
+import {Moment} from "moment";
+
 /**
  * Repräsentation eines Todos.
  */
@@ -20,14 +22,14 @@ export class Todo {
   /**
    * Fälligkeitsdatum des Todos
    */
-  dueDate: string;
+  dueDate: Moment;
 
   /**
    * Status des Todos bezüglich der Erledigung des Todos
    */
   done: boolean;
 
-  constructor(title: string, description: string, dueDate: string) {
+  constructor(title: string, description: string, dueDate: Moment) {
     // Die aktuellen Millisekunden werden als
     this.id = Date.now();
     this.title = title;

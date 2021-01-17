@@ -3,7 +3,7 @@
                                 this.priority <= 2 ? 'due-soon' : ''">
   <mat-expansion-panel-header>
     <mat-panel-title>
-      {{todo.dueDate}}
+      {{todo.dueDate.format('MM/DD/YYYY')}}
     </mat-panel-title>
     <mat-panel-description>
       {{todo.title}}

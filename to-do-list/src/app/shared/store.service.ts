@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Todo} from "./todo.model";
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -29,12 +30,13 @@ export class StoreService {
    * Wurden noch keine Todos gespeichert, wird ein neues Array angelegt
    */
   constructor() {
+
+    this.todos = new Array();
     const todoString = localStorage.getItem('todos');
     if (todoString) {
-      this.todos = JSON.parse(todoString);
-    } else {
-      this.todos = new Array();
+      this.parseTodos(todoString);
     }
+
     this.filterTodos();
   }
 
@@ -90,9 +92,14 @@ export class StoreService {
    * @private
    */
   private saveTodos() {
+    console.log(this.todos);
     localStorage.setItem('todos', JSON.stringify(this.todos));
   }
 
+  /**
+   * Filtert alle Todos
+   * @private
+   */
   private filterTodos() {
     switch (this.filter) {
       case 'all':
@@ -105,5 +112,19 @@ export class StoreService {
         this.filteredTodos = this.todos.filter(todo => !todo.done);
         break;
     }
+  }
+
+  /**
+   * Parsed die aus dem Browser-Speicher geladenen Daten
+   * @param todoString - zu parsender String
+   */
+  parseTodos(todoString: string) {
+    let parsedTodos: Todo[] = JSON.parse(todoString);
+    parsedTodos.map(parsedTodo => {
+      let todo = new Todo(parsedTodo.title, parsedTodo.description, moment(parsedTodo.dueDate));
+      todo.id = parsedTodo.id;
+      todo.done = parsedTodo.done;
+      this.todos.push(todo);
+    });
   }
 }

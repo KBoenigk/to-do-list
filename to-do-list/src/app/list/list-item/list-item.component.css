@@ -13,4 +13,14 @@
 mat-expansion-panel {
   margin-top: 10px !important;
   border: 2px solid transparent;
+  min-width: 400px;
+}
+
+mat-expansion-panel-header {
+  height: fit-content;
+}
+
+mat-panel-title, mat-panel-description {
+  margin-top: auto;
+  margin-bottom: auto;
 }

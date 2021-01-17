@@ -1,7 +1,11 @@
+mat-card {
+  text-align: right;
+}
+
 mat-form-field {
   display: block;
 }
 
-.save-todo {
-  /*float: right;*/
+form button {
+  margin-left: 10px;
 }

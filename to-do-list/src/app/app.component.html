@@ -22,7 +22,7 @@
          [ngClass]="editMode ? 'col-md-6' : 'col-md-12'">
       <app-list (editMode)="onEditMode($event)" #todolist></app-list>
     </div>
-    <div class="col-xs-12 order-md-last order-first"
+    <div class="col-xs-12 order-md-last order-first edit-col"
          *ngIf="editMode"
          [ngClass]="editMode ? 'col-md-6' : 'col-md-12'">
       <app-edit

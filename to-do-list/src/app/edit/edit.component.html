@@ -1,24 +1,45 @@
 <mat-card>
   <mat-card-title>{{this.title}}</mat-card-title>
   <mat-card-content>
-    <mat-form-field>
-      <mat-label>Title</mat-label>
-      <input matInput #titleInput value="{{this.todo.title}}" required>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Choose a due date</mat-label>
-      <input matInput #dueDatePicker [matDatepicker]="picker" [formControl]="dueDate" required>
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Description</mat-label>
-      <textarea matInput #descriptionInput value="{{this.todo.description}}"></textarea>
-    </mat-form-field>
+    <form (ngSubmit)="onSubmit()" #todoForm="ngForm">
+      <mat-form-field>
+        <mat-label>Title</mat-label>
+        <input matInput #titleInput="ngModel"
+                        [ngModel]="this.todo.title"
+                        name="title"
+                        required>
+        <mat-error *ngIf="titleInput.invalid && titleInput.touched">Please enter a title!</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Choose a due date</mat-label>
+        <input matInput #dueDatePicker="ngModel"
+                        [matDatepicker]="picker"
+                        [ngModel]="todo.dueDate"
+                        name="dueDate"
+                        required>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="dueDatePicker.invalid && dueDatePicker.touched">Please enter a valid date!</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Description</mat-label>
+        <textarea matInput
+                  rows="3"
+                  #descriptionInput
+                  [ngModel]="this.todo.description"
+                  name="description"></textarea>
+      </mat-form-field>
+      <button mat-raised-button
+              color="primary"
+              class="save-todo"
+              type="submit"
+              [disabled]="todoForm.invalid">Save</button>
+      <button mat-raised-button
+              color="primary"
+              class="save-todo"
+              type="button"
+              (click)="cancel()">Cancel</button>
+    </form>
   </mat-card-content>
-  <mat-card-actions align="right">
-    <button mat-raised-button color="primary" class="save-todo" (click)="save(titleInput.value, dueDatePicker.value, descriptionInput.value)">Save</button>
-    <button mat-raised-button color="primary" class="save-todo" (click)="cancel()">Cancel</button>
-  </mat-card-actions>
 </mat-card>
 

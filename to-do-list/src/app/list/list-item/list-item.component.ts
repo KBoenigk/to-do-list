@@ -2,7 +2,6 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Todo} from "../../shared/todo.model";
 import {StoreService} from "../../shared/store.service";
 import * as moment from 'moment';
-import {Observable} from "rxjs";
 
 /**
  * Diese Komponente stellt ein Listenelement in der Liste der Todos dar.
@@ -19,6 +18,9 @@ export class ListItemComponent implements OnInit {
    */
   @Input() todo: Todo;
 
+  /**
+   * Die Priorität des Todos dieses Listenelements
+   */
   priority: number;
 
   /**
@@ -28,9 +30,11 @@ export class ListItemComponent implements OnInit {
 
   constructor(private storeService: StoreService) { }
 
+  /**
+   * Berechnet die Priorität des Todos dieses Listenelements
+   */
   ngOnInit(): void {
-    this.priority = moment.duration(moment(this.todo.dueDate).diff(moment.now())).asDays();
-    console.log(this.todo.title + ' ' + this.priority);
+    this.priority = moment.duration(this.todo.dueDate.diff(moment.now())).asDays();
   }
 
   /**
