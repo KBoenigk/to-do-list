@@ -20,6 +20,8 @@ export class ListComponent implements OnInit {
 
   constructor(public storeService: StoreService) { }
 
+  shownTodos = 5;
+
   ngOnInit(): void {
   }
 
@@ -29,5 +31,13 @@ export class ListComponent implements OnInit {
    */
   onEditMode(todo: Todo) {
     this.editMode.emit(todo);
+  }
+
+  resetShownTodos() {
+    this.shownTodos = 5;
+  }
+
+  loadMore() {
+    this.shownTodos += 5;
   }
 }

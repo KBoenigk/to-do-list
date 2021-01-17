@@ -1,7 +1,9 @@
 <mat-accordion>
-  <app-list-item *ngFor="let todo of storeService.filteredTodos"
+  <span *ngIf="this.storeService.filteredTodos.length === 0">No Todos available.</span>
+  <app-list-item *ngFor="let todo of storeService.filteredTodos.slice(0, this.shownTodos)"
                  [todo]="todo"
                  (editMode)="onEditMode($event)"
                  ></app-list-item>
 </mat-accordion>
+<button mat-raised-button *ngIf="this.shownTodos < this.storeService.filteredTodos.length" (click)="loadMore()">Load More...</button>
 

@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {StoreService} from "./shared/store.service";
 import {Todo} from "./shared/todo.model";
 import {BehaviorSubject, Observable} from "rxjs";
+import {ListComponent} from "./list/list.component";
 
 /**
  * Komponente, die das Grundgerüst der App darstellt.
@@ -12,6 +13,8 @@ import {BehaviorSubject, Observable} from "rxjs";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+  @ViewChild('todolist') todoList: ListComponent;
 
   /**
    * Titel der Anwendung.
@@ -28,6 +31,7 @@ export class AppComponent {
    */
   todo: Todo;
 
+  shownTodos=5;
   constructor(private storeService: StoreService) {
   }
 
@@ -58,5 +62,6 @@ export class AppComponent {
 
   filterTodos(filter: string) {
     this.storeService.onFilterChanged(filter);
+    this.todoList.resetShownTodos();
   }
 }
