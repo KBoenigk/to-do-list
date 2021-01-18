@@ -4,8 +4,13 @@ mat-card {
 
 mat-form-field {
   display: block;
+  margin-top: 20px;
 }
 
 form button {
   margin-left: 10px;
+}
+
+.controls {
+  margin-top: 20px;
 }
