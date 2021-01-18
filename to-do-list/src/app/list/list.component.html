@@ -1,5 +1,6 @@
 <mat-accordion>
   <span *ngIf="this.storeService.filteredTodos.length === 0">No Todos available.</span>
+  <span *ngIf="this.error">{{this.error}}</span>
   <app-list-item *ngFor="let todo of storeService.filteredTodos.slice(0, this.shownTodos)"
                  [todo]="todo"
                  (editMode)="onEditMode($event)"

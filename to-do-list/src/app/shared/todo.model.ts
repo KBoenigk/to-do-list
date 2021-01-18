@@ -31,7 +31,8 @@ export class Todo {
 
   constructor(title: string, description: string, dueDate: Moment) {
     // Die aktuellen Millisekunden werden als
-    this.id = Date.now();
+    //this.id = Date.now();
+    this.id = Math.floor((Math.random() * 1000000) + 1);
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;

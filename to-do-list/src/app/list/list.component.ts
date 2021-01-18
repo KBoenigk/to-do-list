@@ -1,7 +1,7 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {StoreService} from "../shared/store.service";
 import {Todo} from "../shared/todo.model";
-import {Observable} from "rxjs";
+import {Observable, Subscription} from "rxjs";
 
 /**
  * Bei dieser Komponente handelt es sich um die Darstellung der Todos als Liste.
@@ -11,7 +11,7 @@ import {Observable} from "rxjs";
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css']
 })
-export class ListComponent implements OnInit {
+export class ListComponent implements OnInit, OnDestroy {
 
   /**
    * Gibt an, ob ein Todo bearbeitet werden soll.
@@ -22,7 +22,18 @@ export class ListComponent implements OnInit {
 
   shownTodos = 5;
 
+  error = null;
+
+  private errorSubscription: Subscription;
+
   ngOnInit(): void {
+    this.errorSubscription = this.storeService.error.subscribe(errorMessage => {
+      this.error = errorMessage;
+    })
+  }
+
+  ngOnDestroy(): void {
+    this.errorSubscription.unsubscribe();
   }
 
   /**

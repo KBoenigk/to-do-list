@@ -27,7 +27,7 @@ export class EditComponent implements OnInit {
   /**
    * Eingabeformular zum Bearbeiten und Erstellen von Todos
    */
-  @ViewChild('todoForm') todoForm: NgForm;
+  @ViewChild('todoForm', {static: true}) todoForm: NgForm;
 
   /**
    * Wird der Todo neu erstellt?
@@ -46,7 +46,8 @@ export class EditComponent implements OnInit {
   dueDate;
 
 
-  constructor(private storeService: StoreService) { }
+  constructor(private storeService: StoreService) {
+  }
 
   /**
    * Prüft, ob ein vorhandenes Todo bearbeitet werden soll oder ob ein neues erstellt werden soll.
@@ -60,8 +61,6 @@ export class EditComponent implements OnInit {
     } else {
       this.title = 'Edit Todo';
     }
-
-    // this.dueDate = new FormControl(moment(this.todo.dueDate));
   }
 
   /**
